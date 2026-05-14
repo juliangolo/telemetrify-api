@@ -1,0 +1,21 @@
+{
+  "name": "telemetrify-api",
+  "version": "1.0.0",
+  "main": "src/app.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "node --watch src/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Julián Gómez",
+  "license": "ISC",
+  "description": "API RESTful de procesamiento de telemetría y logs",
+  "dependencies": {
+    "express": "^5.2.1",
+    "morgan": "^1.10.1"
+  }
+}
