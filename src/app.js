@@ -30,7 +30,16 @@ app.use((req, res, next) => {
 });
 
 eventBus.on('telemetry_error', (error) => {
-    console.log('🚨 [EVENT BUS] Fallo crítico en telemetría:', error.message);
+ console.log('🚨 [EVENT BUS] Fallo crítico en telemetría:', error.message);
+});
+
+// --- MIDDLEWARE CENTRALIZADO DE ERRORES (Tema 6) ---
+app.use((err, req, res, next) => {
+    res.status(500).json({
+        status: 'error',
+        message: 'Error interno del servidor. No se pudo procesar la solicitud.',
+        detail: err.message
+    });
 });
 
 // --- INICIO DEL SERVIDOR (Tema 5 y 6)

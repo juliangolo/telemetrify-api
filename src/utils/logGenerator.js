@@ -30,5 +30,10 @@ function generateMassiveLog() {
  
 module.exports = { generateMassiveLog }; // Tema 3: Exportación CommonJS
 
+// Solo se ejecuta si corremos este archivo directamente en la terminal
+if (require.main === module) {
+    generateMassiveLog();
+}
+
 
 
