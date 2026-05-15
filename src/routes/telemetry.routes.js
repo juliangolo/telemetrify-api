@@ -6,5 +6,7 @@ const telemetryController = require('../controllers/telemetry.controller');
 // Creo una ruta Get '/' utilizando este 'router'.
 router.get('/', telemetryController.getMetrics);
 
+// Paso como función manejadora 'telemetryController.getMetrics'
+
 
 module.exports = router; // Tema 3: Exportación CommonJS

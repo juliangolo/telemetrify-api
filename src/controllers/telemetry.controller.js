@@ -1,12 +1,24 @@
 // src/controllers/telemetry.controller.js
-const fs = require('node:fs/promises');
+const fs = require('node:fs');
+const path = require('node:path');
+const zlib = require('node:zlib');
 
 const getMetrics = async (req, res, next) => {
     try {
-        res.status(200).json({ status: 'ok', data: 'Lista de métricas' });
-    } catch (error) {
-        next(error);
-    }
-};
+        //Defino 'logPath apuntando a '../../telemetry.log' uso path.join y __dirname
+        const logPath = path.join(__dirname, '../../', 'telemetry.log');
+        // Creo un Readable Stream y uso fs.createReadStream() pasándole 'logPath' y la codificación 'utf-8'.
+        // y lo asigno a la contante 'readStream'
+        const readStream = fs.createReadStream(logPath, 'utf-8');
+        const gzipStream = zlib.createGzip();
+        res.status(200);
+        res.set('Content-Encoding', 'gzip');
+        
+        readStream.pipe(gzipStream).pipe(res);
 
-module.exports = { getMetrics }; // Tema 3: Exportación CommonJS}
+        } catch (error) {
+            next(error);
+        }
+    }
+
+module.exports = { getMetrics }; // Tema 3: Exportación CommonJS
